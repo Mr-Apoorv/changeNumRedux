@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { increaseNo, decreaseNo } from "./redux/action/indexAction";
 
 function App() {
+  let numberState = useSelector((state) => {
+    return state.changeTheNum;
+  });
+  let dispatch = useDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button
+        onClick={() => {
+          dispatch(decreaseNo(10));
+        }}
+      >
+        -
+      </button>
+      <input type="text" value={numberState} readOnly />
+      <button
+        onClick={() => {
+          dispatch(increaseNo(5));
+        }}
+      >
+        +
+      </button>
+    </>
   );
 }
 
